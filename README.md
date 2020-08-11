@@ -50,7 +50,7 @@ Run this script to generate both keys and copy and paste each key into their res
 	    "emailAddress": "foo@bar.com",
 	    "password": "password"
     }'
-***
+
 ## User login (generates a token)
     curl --location --request POST 'http://localhost:3000/login' \
     --header 'Content-Type: application/json' \
@@ -59,7 +59,6 @@ Run this script to generate both keys and copy and paste each key into their res
         "password": "password"
     }'  
 
-***
 ## Fetch a single user by ID (token required)
 Demonstrable purposes only as you wouldn't expose all users
 
@@ -67,7 +66,6 @@ Demonstrable purposes only as you wouldn't expose all users
     --header 'Content-Type: application/json' \
     --header 'Authorization: Bearer <token.goes.here>'
 
-***
 ## Fetch all users (token required)
 Demonstrable purposes only as you wouldn't expose all users
 
@@ -75,7 +73,6 @@ Demonstrable purposes only as you wouldn't expose all users
     --header 'Content-Type: application/json' \
     --header 'Authorization: Bearer <token.goes.here>'
 
-***
 ## Update a user by ID (token required) - TODO: add PATCH
 Demonstrable purposes only as you wouldn't allow users to edit other users
 
@@ -89,7 +86,6 @@ Demonstrable purposes only as you wouldn't allow users to edit other users
         "emailAddress": "foo@bar.com"
     }'
 
-***
 ## Delete a user by ID (token required)
 Demonstrable purposes only as you wouldn't allow users to delete other users
 
