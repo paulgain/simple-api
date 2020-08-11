@@ -1,0 +1,38 @@
+version: '3'
+
+services:
+
+  api:
+    container_name: api
+    build:
+      context: .
+    volumes:
+      - ./src:/usr/src/app/src
+    env_file: .env
+    ports:
+      - "3000:3000"
+    expose:
+      - "3000" 
+    image: api
+    depends_on:
+      - db
+    command: sh -c './wait-for-it.sh db:3306 -t 60 -- yarn develop'
+
+  db:
+    container_name: db
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_PORT: ${MYSQL_PORT}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD} 
+    ports:
+      - "3307:3306"
+    expose:
+      - "3306"
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./logs/mysql:/var/log/mysql
+      - ./dev-dump.sql:/docker-entrypoint-initdb.d/dev-dump.sql

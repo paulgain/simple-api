@@ -1,0 +1,6 @@
+.env
+.history
+.vscode
+data
+logs
+node_modules
