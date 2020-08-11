@@ -1,46 +1,53 @@
 # Express, MySQL, JSON Web Token (JWT) and Docker
-A simple REST API with basic CRUD operations on users with JWT authentication.
+A simple REST API with basic CRUD operations on Users with JWT authentication.
 
-1. Create a user
-2. Log in to generate a digitally signed JWT. 
+## Getting started
+In order to sign and verify the JWT we need to create a public/private RSA key pair. These keys are then added as environment variables to `.env`
 
-All future requests to restricted endpoints must include the token in the HTTP Authorization request header where the signature is verified.
-
-## Generate a public/private RSA key pair
-The JWT is digitally signed with a public/private key pair using RSA.
-
-Docker Compose's dotenv parser does not support multiline environment variables: 
+Known issue: Docker Compose's dotenv parser does not support multiline environment variables: 
 https://github.com/docker/compose/issues/3527
 
-This means we can't set both `JWT_PUBLIC_KEY` and `JWT_PRIVATE_KEY` environment variables over multiple lines. As a workaround we can base64 encode each key and copy and paste each key into a single line, the server will decode both keys when signing and verifying the token.
+This means we can't set both `JWT_PUBLIC_KEY` and `JWT_PRIVATE_KEY` environment variables over multiple lines. As a workaround we can base64 encode each key and copy and paste each key into a single line, the server will decode both keys on initialization ready for signing and verifying tokens later.
 
-Run this script to generate both keys and copy and paste each key into their respective env var.
-
+### Generate a public/private RSA key pair
+Run this script to generate both keys and copy and paste each key into their respective environment variable.
+    
     $ ./keygen.sh
 
-## Build the image
+### Running the project within Docker
+
+Build the image 
+    
     $ docker build -t api:latest .
 
-## Bring up the containers
+Bring up the containers
+
     $ docker-compose up
 
-## Useful Docker commands
+### Useful Docker commands
 
-### List all images (e.g. api, node and mysql)
+List all images (e.g. api, node and mysql)
+
     $ docker images
 
-### List the 2 containers (api and mysql:5.7)
+List the 2 containers (api and mysql:5.7)
+    
     $ docker ps
 
-### Go inside the api container
+Go inside the api container
+
     $ docker exec -it api /bin/bash
 
-### Go inside the db container
+Go inside the db container
+    
     $ docker exec -it db /bin/bash
 
-# Simple API
+### API usage
+1. Create a user
+2. Login to generate a digitally signed JWT (the token)
+3. Call one of the protected endpoints with the token
 
-## Create a user
+#### Create a user
     curl --location --request POST 'http://localhost:3000/api/users' \
     --header 'Content-Type: application/json' \
     --data-raw '{
@@ -51,7 +58,7 @@ Run this script to generate both keys and copy and paste each key into their res
 	    "password": "password"
     }'
 
-## User login (generates a token)
+#### User login (generates a token)
     curl --location --request POST 'http://localhost:3000/login' \
     --header 'Content-Type: application/json' \
     --data-raw '{
@@ -59,21 +66,21 @@ Run this script to generate both keys and copy and paste each key into their res
         "password": "password"
     }'  
 
-## Fetch a single user by ID (token required)
+#### Fetch a single user by ID (token required)
 Demonstrable purposes only as you wouldn't expose all users
 
     curl --location --request GET 'http://localhost:3000/api/users/1' \
     --header 'Content-Type: application/json' \
     --header 'Authorization: Bearer <token.goes.here>'
 
-## Fetch all users (token required)
+#### Fetch all users (token required)
 Demonstrable purposes only as you wouldn't expose all users
 
     curl --location --request GET 'http://localhost:3000/api/users' \
     --header 'Content-Type: application/json' \
     --header 'Authorization: Bearer <token.goes.here>'
 
-## Update a user by ID (token required) - TODO: add PATCH
+#### Update a user by ID (token required) - TODO: add PATCH
 Demonstrable purposes only as you wouldn't allow users to edit other users
 
     curl --location --request PUT 'http://localhost:3000/api/users/1' \
@@ -86,7 +93,7 @@ Demonstrable purposes only as you wouldn't allow users to edit other users
         "emailAddress": "foo@bar.com"
     }'
 
-## Delete a user by ID (token required)
+#### Delete a user by ID (token required)
 Demonstrable purposes only as you wouldn't allow users to delete other users
 
     curl --location --request DELETE 'http://localhost:3000/api/users/1' \
