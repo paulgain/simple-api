@@ -1,3 +1,4 @@
+const logger = require('../config/logger')
 const mysql = require('mysql')
 
 const config = require('../config')
@@ -12,19 +13,13 @@ const connection = mysql.createConnection({
   dateStrings: true,
 })
 
-connection.connect((err) => {
-  if (err) {
-    console.log("MySQL connection failed", err)
+connection.connect((error) => {
+  if (error) {
+    logger.error('MySQL connection failed', error)
     return
   }
 
-  console.log(`MySQL connected on port ${config.mysql.port}`)
+  logger.info('MySQL connected on port %s', config.mysql.port)
 })
-
-connection.on('error', (err) => {
-  console.log(err.code);
-  console.log(err.fatal);
-  console.log(err.sqlMessage)
-});
 
 module.exports  = connection

@@ -18,6 +18,7 @@ const decodeBase64Key = (key, envVar) => {
 const config = {
   root,
   port: process.env.PORT,
+  logLevel: process.env.LOG_LEVEL,
   mysql: {
     port: process.env.MYSQL_PORT,
     rootPassword: process.env.MYSQL_ROOT_PASSWORD,
