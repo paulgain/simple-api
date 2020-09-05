@@ -3,7 +3,7 @@ _A simple REST API with basic CRUD operations on users with JWT authentication._
 
 # Table of Contents
 
-- [Copy sample.env](#copy-sampleenv)
+- [Copy sample dot env](#copy-sample-dot-env)
 - [Create the Keys](#create-the-keys)
 - [Docker commands](#docker-commands)
 - [API usage](#api-usage)
@@ -15,7 +15,7 @@ _A simple REST API with basic CRUD operations on users with JWT authentication._
   - [Delete a user](#delete-a-user)
 - [References](#references)
 
-## Copy sample.env
+## Copy sample dot env
 
     $ cp sample.env .env
 
