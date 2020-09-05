@@ -1,7 +1,25 @@
 # Express, MySQL, JSON Web Token (JWT) and Docker
-A simple REST API with basic CRUD operations on Users with JWT authentication.
+_A simple REST API with basic CRUD operations on users with JWT authentication._
 
-## Getting started
+# Table of Contents
+
+- [Copy sample.env](#copy-sample.env)
+- [Create the Keys](#create-the-keys)
+- [Docker commands](#docker-commands)
+- [API usage](#api-usage)
+  - [Create a user](#create-a-user)
+  - [User login](#user-login)
+  - [Get a user](#get-a-user)
+  - [Get all users](#get-all-users)
+  - [Update a user](#update-a-user)
+  - [Delete a user](#delete-a-user)
+- [References](#references)
+
+## Copy sample.env
+
+    $ cp sample.env .env
+
+## Create the keys
 In order to sign and verify the JWT we need to create a public/private RSA key pair. These keys are then added as environment variables to `.env`
 
 Known issue: Docker Compose's dotenv parser does not support multiline environment variables: 
@@ -9,26 +27,18 @@ https://github.com/docker/compose/issues/3527
 
 This means we can't set both `JWT_PUBLIC_KEY` and `JWT_PRIVATE_KEY` environment variables over multiple lines. As a workaround we can base64 encode each key and copy and paste each key into a single line, the server will decode both keys on initialization ready for signing and verifying tokens later.
 
-### Copy sample.env
-
-    $ cp sample.env .env
-
-### Generate a public/private RSA key pair
-Run this script to generate both keys and copy and paste each key into their respective environment variable.
+Run this script to generate both keys and copy and paste each key into their respective environment variable within `.env`
     
     $ ./keygen.sh
 
-### Running the project within Docker
-
-Build the image 
+## Docker commands
+Build the images
     
     $ docker build -t api:latest .
 
 Bring up the containers
 
     $ docker-compose up
-
-### Useful Docker commands
 
 List all images (e.g. api, node and mysql)
 
@@ -46,12 +56,12 @@ Go inside the db container
     
     $ docker exec -it db /bin/bash
 
-### API usage
+## API usage
 1. Create a user
 2. Login to generate a digitally signed JWT (the token)
 3. Call one of the protected endpoints with the token
 
-#### Create a user
+### Create a user
     curl --location --request POST 'http://localhost:3000/api/users' \
     --header 'Content-Type: application/json' \
     --data-raw '{
@@ -62,7 +72,9 @@ Go inside the db container
 	    "password": "password"
     }'
 
-#### User login (generates a token)
+### User login 
+This generates the token:
+
     curl --location --request POST 'http://localhost:3000/login' \
     --header 'Content-Type: application/json' \
     --data-raw '{
@@ -70,21 +82,21 @@ Go inside the db container
         "password": "password"
     }'  
 
-#### Fetch a single user by ID (token required)
+### Get a user
 Demonstrable purposes only as you wouldn't expose all users
 
     curl --location --request GET 'http://localhost:3000/api/users/1' \
     --header 'Content-Type: application/json' \
     --header 'Authorization: Bearer <token.goes.here>'
 
-#### Fetch all users (token required)
+### Get all users
 Demonstrable purposes only as you wouldn't expose all users
 
     curl --location --request GET 'http://localhost:3000/api/users' \
     --header 'Content-Type: application/json' \
     --header 'Authorization: Bearer <token.goes.here>'
 
-#### Update a user by ID (token required) - TODO: add PATCH
+### Update a user
 Demonstrable purposes only as you wouldn't allow users to edit other users
 
     curl --location --request PUT 'http://localhost:3000/api/users/1' \
@@ -97,7 +109,7 @@ Demonstrable purposes only as you wouldn't allow users to edit other users
         "emailAddress": "foo@bar.com"
     }'
 
-#### Delete a user by ID (token required)
+### Delete a user
 Demonstrable purposes only as you wouldn't allow users to delete other users
 
     curl --location --request DELETE 'http://localhost:3000/api/users/1' \
