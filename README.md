@@ -9,6 +9,10 @@ https://github.com/docker/compose/issues/3527
 
 This means we can't set both `JWT_PUBLIC_KEY` and `JWT_PRIVATE_KEY` environment variables over multiple lines. As a workaround we can base64 encode each key and copy and paste each key into a single line, the server will decode both keys on initialization ready for signing and verifying tokens later.
 
+### Copy sample.env
+
+    $ cp sample.env .env
+
 ### Generate a public/private RSA key pair
 Run this script to generate both keys and copy and paste each key into their respective environment variable.
     
