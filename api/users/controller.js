@@ -1,18 +1,18 @@
 const { NOT_FOUND } = require('../const')
 const model = require('../model/users')
 
-const createUser = async (req, res) => {
+const createUser = async (req, res, next) => {
   try {
     const user = await model.createUser(Object.values(req.body))
     res.status(201).send(user)
   } catch (error) {
-    res.status(500).send({
-      message: error.message || 'Some error occurred while creating a User'
-    });
+    const message = error.message || 'Some error occurred while creating a User'
+    res.status(500).send({ message })
+    next(error)
   }
 }
 
-const getUser = async (req, res) => {
+const getUser = async (req, res, next) => {
   try {
     const user = await model.getUser(req.params.id)
     res.send(user)
@@ -21,22 +21,23 @@ const getUser = async (req, res) => {
       res.status(400).send({ message: `Not found User with id ${req.params.id}` })
     } else {
       res.status(500).send({ message: `Error retrieving User with id ${req.params.id}` })
+      next(error)
     }
   }
 }
 
-const getUsers = async (req, res) => {
+const getUsers = async (req, res, next) => {
   try {
     const users = await model.getUsers()
     res.send(users)
   } catch (error) {
-    res.status(500).send({
-      message: error.message || 'An error occurred while retrieving Users'
-    });
+    const message = error.message || 'An error occurred while retrieving Users' 
+    res.status(500).send({ message });
+    next(error)
   }
 }
 
-const updateUser = async (req, res) => {
+const updateUser = async (req, res, next) => {
   try {
     const user = [req.params.id, ...Object.values(req.body)]
     const updatedUser = await model.updateUser(user)
@@ -46,11 +47,12 @@ const updateUser = async (req, res) => {
       res.status(400).send({ message: `Not found User with id ${req.params.id}` })
     } else {
       res.status(500).send({ message: `Error User with id ${req.params.id}` });
+      next(error)
     }
   }
 }
 
-const deleteUser = async (req, res) => {
+const deleteUser = async (req, res, next) => {
   try {
     await model.deleteUser(req.params.id)
     res.send({ message: 'User was deleted successfully!' })
@@ -59,6 +61,7 @@ const deleteUser = async (req, res) => {
       res.status(400).send({ message: `Not found User with id ${req.params.id}` })
     } else {
       res.status(500).send({ message: `Could not delete User with id ${req.params.id}` })
+      next(error)
     }
   }
 }
@@ -72,6 +75,7 @@ const newUserEmailAddressCheck = async (req, res, next) => {
       next()
     } else {
       res.status(500).send({ message: 'Error fetching User from email address' })
+      next(error)
     }
   }
 }
