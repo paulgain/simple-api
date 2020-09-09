@@ -8,7 +8,6 @@ const createUser = async (req, res, next) => {
   } catch (error) {
     const message = error.message || 'Some error occurred while creating a User'
     res.status(500).send({ message })
-    next(error)
   }
 }
 
@@ -21,7 +20,6 @@ const getUser = async (req, res, next) => {
       res.status(400).send({ message: `Not found User with id ${req.params.id}` })
     } else {
       res.status(500).send({ message: `Error retrieving User with id ${req.params.id}` })
-      next(error)
     }
   }
 }
@@ -33,7 +31,6 @@ const getUsers = async (req, res, next) => {
   } catch (error) {
     const message = error.message || 'An error occurred while retrieving Users' 
     res.status(500).send({ message });
-    next(error)
   }
 }
 
@@ -47,7 +44,6 @@ const updateUser = async (req, res, next) => {
       res.status(400).send({ message: `Not found User with id ${req.params.id}` })
     } else {
       res.status(500).send({ message: `Error User with id ${req.params.id}` });
-      next(error)
     }
   }
 }
@@ -61,7 +57,6 @@ const deleteUser = async (req, res, next) => {
       res.status(400).send({ message: `Not found User with id ${req.params.id}` })
     } else {
       res.status(500).send({ message: `Could not delete User with id ${req.params.id}` })
-      next(error)
     }
   }
 }
@@ -75,7 +70,6 @@ const newUserEmailAddressCheck = async (req, res, next) => {
       next()
     } else {
       res.status(500).send({ message: 'Error fetching User from email address' })
-      next(error)
     }
   }
 }

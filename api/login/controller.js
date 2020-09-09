@@ -10,7 +10,6 @@ const getUserFromEmailAddress = async (req, res, next) => {
       res.status(401).send({ message: 'Email and password do not match' })
     } else {
       res.status(500).send({ message: 'Error fetching User from email address' })
-      next(error)
     }
   }
 }

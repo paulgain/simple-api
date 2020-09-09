@@ -1,8 +1,5 @@
 const { createLogger, transports, format } = require('winston')
-const expressWinston = require('express-winston')
 const config = require('./')
-
-const MESSAGE = "HTTP {{res.statusCode}} {{req.method}} {{req.url}} response_time={{res.responseTime}}"
 
 // ----------
 // Log levels
@@ -31,28 +28,4 @@ const logger = createLogger({
   ],
 });
 
-const httpOptions = {
-  msg: MESSAGE,
-  metaField: 'detail',
-  winstonInstance: logger,
-}
-
-const httpLogger = expressWinston.logger({ 
-  ...httpOptions,
-  meta: true,
-})
-
-const httpErrorLogger = expressWinston.errorLogger({
-  ...httpOptions,
-  blacklistedMetaFields: [
-    'process',
-    'os',
-    'trace',
-  ]
-});
-
-module.exports = {
-  logger,
-  httpLogger,
-  httpErrorLogger
-}
+module.exports = logger

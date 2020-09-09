@@ -13,10 +13,15 @@ const decodeBase64Key = (key, envVar) => {
   }
 
   return Buffer.from(key, 'base64').toString()
-} 
+}
+
+const isDev = process.env.NODE_ENV === 'development'
+const isProd = process.env.NODE_ENV === 'production'
 
 const config = {
   root,
+  isDev,
+  isProd,
   port: process.env.PORT,
   logLevel: process.env.LOG_LEVEL,
   mysql: {
