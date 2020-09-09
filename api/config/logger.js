@@ -21,7 +21,6 @@ const logger = createLogger({
       humanReadableUnhandledException: true,
       format: format.combine(
         format.colorize({ all: true }),
-        format.splat(),
         format.simple(),
       ),
     })
