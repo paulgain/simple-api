@@ -7,13 +7,10 @@ const DOB = Joi.date().format('YYYY-MM-DD').required()
 const EMAIL = Joi.string().email().required()
 const PASSWORD = Joi.string().regex(/^[a-z]{8}$/).required() // Keep it simple for dev purposes!
 
-const NOT_FOUND = 'not_found'
-
 module.exports = {
   ID,
   NAME,
   DOB,
   EMAIL,
   PASSWORD,
-  NOT_FOUND
 }

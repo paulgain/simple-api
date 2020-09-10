@@ -1,4 +1,3 @@
-const { NOT_FOUND } = require('../const')
 const model = require('../model/users')
 
 const createUser = async (req, res, next) => {
@@ -17,7 +16,7 @@ const getUser = async (req, res, next) => {
     const user = await model.getUser(req.params.id)
     res.send(user)
   } catch (error) {
-    if (error.kind === NOT_FOUND) {
+    if (error.statusCode === 400) {
       res.status(400).send({ message: `Not found User with id ${req.params.id}` })
     } else {
       res.status(500).send({ message: `Error retrieving User with id ${req.params.id}` })
@@ -43,7 +42,7 @@ const updateUser = async (req, res, next) => {
     const updatedUser = await model.updateUser(user)
     res.send(updatedUser)
   } catch (error) {
-    if (error.kind === NOT_FOUND) {
+    if (error.statusCode === 400) {
       res.status(400).send({ message: `Not found User with id ${req.params.id}` })
     } else {
       res.status(500).send({ message: `Error User with id ${req.params.id}` });
@@ -57,7 +56,7 @@ const deleteUser = async (req, res, next) => {
     await model.deleteUser(req.params.id)
     res.send({ message: 'User was deleted successfully!' })
   } catch (error) {
-    if (error.kind === NOT_FOUND) {
+    if (error.statusCode === 400) {
       res.status(400).send({ message: `Not found User with id ${req.params.id}` })
     } else {
       res.status(500).send({ message: `Could not delete User with id ${req.params.id}` })
@@ -71,7 +70,7 @@ const newUserEmailAddressCheck = async (req, res, next) => {
     await model.getUserFromEmailAddress(req.body.emailAddress)
     res.status(409).send({ message: 'Email address has been taken' })
   } catch (error) {
-    if (error.kind === NOT_FOUND) {
+    if (error.statusCode === 400) {
       next()
     } else {
       res.status(500).send({ message: 'Error fetching User from email address' })

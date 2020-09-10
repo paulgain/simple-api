@@ -1,6 +1,6 @@
 const { isEmpty } = require('lodash')
 
-const { NOT_FOUND } = require('../const')
+const { NotFoundError } = require('../middleware/errors')
 const db = require('../db')
 
 const createUser = (user) => {
@@ -19,7 +19,7 @@ const getUser = (userId) => {
       }
 
       if (!results[0].length) {
-        return reject({ kind: NOT_FOUND }) 
+        return reject(new NotFoundError()) 
       }
 
       resolve(results[0])
@@ -43,7 +43,7 @@ const updateUser = (user) => {
       }
 
       if (!results[0].length) {
-        return reject({ kind: NOT_FOUND }) 
+        return reject(new NotFoundError())
       }
       
       resolve(results[0])
@@ -59,7 +59,7 @@ const deleteUser = (userId) => {
       }
 
       if (results.affectedRows === 0) {
-        return reject({ kind: NOT_FOUND })
+        return reject(new NotFoundError()) 
       }
         
       resolve()
@@ -77,7 +77,7 @@ const getUserFromEmailAddress = (emailAddress) => {
       const user = results[0][0] 
 
       if (isEmpty(user)) {
-        return reject({ kind: NOT_FOUND }) 
+        return reject(new NotFoundError()) 
       }
 
       resolve({ ...user })

@@ -1,10 +1,13 @@
 const logger = require('../config/logger')
+class NotFoundError extends Error {
+  constructor() {
+    super('Not Found')
+    this.statusCode = 404
+  }
+}
 
 const notFound = (req, res, next) => {
-  const error = new Error()
-  error.statusCode = 404
-  error.statusMessage = 'Not Found'
-  next(error);
+  next(new NotFoundError())
 }
 
 const catchAll = (error, req, res, next) => {
@@ -18,4 +21,5 @@ const catchAll = (error, req, res, next) => {
 module.exports = {
   notFound,
   catchAll,
+  NotFoundError,
 }
