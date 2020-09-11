@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const verifyToken = require('../middleware/jwt/verify-token')
+const verifyToken = require('../middleware/verify-token')
 const { hashPassword } = require('../middleware/hash')
 
 const {

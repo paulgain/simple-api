@@ -1,7 +1,7 @@
 const { omit } = require('lodash')
 const jwt = require('jsonwebtoken')
 
-const config = require('../../config')
+const config = require('../config')
 const { privateKey, algorithm } = config.jwt
 
 const signToken = async(req, res) => {

@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 
-const config = require('../../config')
+const config = require('../config')
 const ERROR_MESSAGE = 'You\'re unauthorized to use this service'
 
 const verifyToken = async(req, res, next) => {
