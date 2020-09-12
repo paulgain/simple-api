@@ -57,3 +57,6 @@ delete-user:
 	curl --location --request DELETE "${api-root}/api/users/$(id)" \
 	  --header 'Content-Type: application/json' \
 	  --header "Authorization: Bearer ${token}"
+
+unit-tests:
+	yarn circle-unit	

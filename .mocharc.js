@@ -14,4 +14,5 @@ global.rootPath = `${process.cwd()}`
 module.exports = {
   ui: 'bdd',
   spec: 'test/unit/**/*.test.js',
+  reporter: 'mocha-circleci-reporter',
 }
