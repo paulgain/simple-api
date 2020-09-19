@@ -38,8 +38,8 @@ describe('getUser', () => {
   context('Not found', () => {
     const middleware = configureMiddleware({ params: { id: 1 } })
 
-    const error = new Error(400)
-    error.statusCode = 400
+    const error = new Error(404)
+    error.statusCode = 404
 
     before(async () => {
       getUserStub.rejects(error)
@@ -51,8 +51,8 @@ describe('getUser', () => {
       )
     })
 
-    it('should set status as 400 and display a message', () => {
-      expect(middleware.res.status).to.have.been.calledWith(400)
+    it('should set status as 404 and display a message', () => {
+      expect(middleware.res.status).to.have.been.calledWith(404)
       expect(middleware.res.send).to.have.been.calledWith({ 
         message: 'Not found User with id 1'
       })

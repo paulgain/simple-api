@@ -75,6 +75,7 @@ delete-user:
 
 unit-tests:
 	@echo "Run the unit tests"
+	npm run test:unit
 
 # -------------------------------------------
 # Dockerhub
