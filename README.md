@@ -1,5 +1,8 @@
 # Express, MySQL, JSON Web Token (JWT) and Docker
+
 _A simple REST API with basic CRUD operations on users with JWT authentication._
+
+[![CircleCI](https://circleci.com/gh/paulgain/simple-api.svg?style=svg)](https://circleci.com/gh/paulgain/simple-api)
 
 # Table of Contents
 
