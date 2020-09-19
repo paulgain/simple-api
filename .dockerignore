@@ -3,4 +3,6 @@
 !api/**
 !package.json
 !yarn.lock
+!test/**
+!.mocharc.js
 !wait-for-it.sh

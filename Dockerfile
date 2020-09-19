@@ -5,5 +5,5 @@ COPY package.json .
 COPY yarn.lock .
 RUN yarn
 
-COPY api/** ./
+COPY . .
 COPY wait-for-it.sh .

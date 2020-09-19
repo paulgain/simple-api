@@ -75,7 +75,8 @@ delete-user:
 
 unit-tests:
 	@echo "Run the unit tests"
-	npm run test:unit
+	docker build -t paulgain/simple-api:latest .
+	docker run -it paulgain/simple-api bash -c 'npm run test:unit'
 
 # -------------------------------------------
 # Dockerhub
