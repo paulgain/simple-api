@@ -5,7 +5,7 @@ _A simple REST API with basic CRUD operations on users with JWT authentication._
 
 - [Copy sample dot env](#copy-sample-dot-env)
 - [Create the Keys](#create-the-keys)
-- [Docker commands](#docker-commands)
+- [Starting and stopping the API](#starting-and-stopping-the-api)
 - [API usage](#api-usage)
   - [Create a user](#create-a-user)
   - [User login](#user-login)
@@ -31,30 +31,10 @@ Run this script to generate both keys and copy and paste each key into their res
     
     $ ./keygen.sh
 
-## Docker commands
-Build the images
-    
-    $ docker build -t api:latest .
+## Starting and stopping the API
 
-Bring up the containers
-
-    $ docker-compose up
-
-List all images (e.g. api, node and mysql)
-
-    $ docker images
-
-List the 2 containers (api and mysql:5.7)
-    
-    $ docker ps
-
-Go inside the api container
-
-    $ docker exec -it api /bin/bash
-
-Go inside the db container
-    
-    $ docker exec -it db /bin/bash
+    $ make start-api
+    $ make stop-api
 
 ## API usage
 1. Create a user
