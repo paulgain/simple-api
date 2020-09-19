@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "engines": {
-    "node": "13.0.0"
+    "node": "12.18.0"
   },
   "scripts": {
     "start": "node api",
