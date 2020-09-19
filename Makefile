@@ -74,7 +74,7 @@ delete-user:
 # -------------------------------------------
 
 unit-tests:
-	console.log('Run the unit tests!')
+	@echo "Run the unit tests"
 
 # -------------------------------------------
 # Dockerhub
