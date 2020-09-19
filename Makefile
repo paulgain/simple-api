@@ -1,7 +1,18 @@
 #!/bin/bash
 
 # -------------------------------------------
-# Make commands
+# Utilities
+# -------------------------------------------
+
+start-api:
+	docker build -t paulgain/simple-api:latest .
+	docker-compose up
+
+stop-api:
+	docker-compose stop
+
+# -------------------------------------------
+# REST API endpoint helpers
 # -------------------------------------------
 # make create-user 
 # make user-login         (generates a token)
@@ -58,5 +69,20 @@ delete-user:
 	  --header 'Content-Type: application/json' \
 	  --header "Authorization: Bearer ${token}"
 
+# -------------------------------------------
+# Pipeline
+# -------------------------------------------
+
 unit-tests:
-	yarn circle-unit	
+	console.log('Run the unit tests!')
+
+# -------------------------------------------
+# Dockerhub
+# -------------------------------------------
+
+dockerhub-push:
+	docker build -t paulgain/simple-api:latest .
+	docker push paulgain/simple-api
+
+dockerhub-pull:
+	docker pull paulgain/simple-api
