@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   unit_tests:
     docker: 
-      - image: circleci/node:14.9.0
+      - image: circleci/node:13.0.0
     steps:
       - setup_remote_docker
       - checkout
