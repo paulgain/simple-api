@@ -17,9 +17,11 @@ const getUser = async (req, res, next) => {
     res.send(user)
   } catch (error) {
     if (error.statusCode === 404) {
-      res.status(404).send({ message: `Not found User with id ${req.params.id}` })
+      const message = `Not found User with id ${req.params.id}`
+      res.status(404).send({ message })
     } else {
-      res.status(500).send({ message: `Error retrieving User with id ${req.params.id}` })
+      const message = `Error retrieving User with id ${req.params.id}`
+      res.status(500).send({ message })
       next(error)
     }
   }
@@ -30,8 +32,8 @@ const getUsers = async (req, res, next) => {
     const users = await model.getUsers()
     res.send(users)
   } catch (error) {
-    const message = error.message || 'An error occurred while retrieving Users' 
-    res.status(500).send({ message });
+    const message = error.message || 'An error occurred while retrieving Users'
+    res.status(500).send({ message })
     next(error)
   }
 }
@@ -43,9 +45,11 @@ const updateUser = async (req, res, next) => {
     res.send(updatedUser)
   } catch (error) {
     if (error.statusCode === 404) {
-      res.status(404).send({ message: `Not found User with id ${req.params.id}` })
+      const message = `Not found User with id ${req.params.id}`
+      res.status(404).send({ message })
     } else {
-      res.status(500).send({ message: `Error User with id ${req.params.id}` });
+      const message = `Error User with id ${req.params.id}`
+      res.status(500).send({ message })
       next(error)
     }
   }
@@ -57,9 +61,11 @@ const deleteUser = async (req, res, next) => {
     res.send({ message: 'User was deleted successfully!' })
   } catch (error) {
     if (error.statusCode === 404) {
-      res.status(404).send({ message: `Not found User with id ${req.params.id}` })
+      const message = `Not found User with id ${req.params.id}`
+      res.status(404).send({ message })
     } else {
-      res.status(500).send({ message: `Could not delete User with id ${req.params.id}` })
+      const message = `Could not delete User with id ${req.params.id}`
+      res.status(500).send({ message })
       next(error)
     }
   }
@@ -73,7 +79,8 @@ const newUserEmailAddressCheck = async (req, res, next) => {
     if (error.statusCode === 404) {
       next()
     } else {
-      res.status(500).send({ message: 'Error fetching User from email address' })
+      const message = 'Error fetching User from email address'
+      res.status(500).send({ message })
       next(error)
     }
   }

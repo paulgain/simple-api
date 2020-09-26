@@ -4,12 +4,14 @@ const isBase64 = require('is-base64')
 const root = path.normalize(`${__dirname}/../..`)
 
 const decodeBase64Key = (key, envVar) => {
-  if(!key) {
+  if (!key) {
     throw new Error(`Missing env var ${envVar}`)
   }
 
-  if(!isBase64(key)) {
-    throw new Error(`The env var ${envVar} should be base64 encoded, run keygen.sh`)
+  if (!isBase64(key)) {
+    throw new Error(
+      `The env var ${envVar} should be base64 encoded, run keygen.sh`
+    )
   }
 
   return Buffer.from(key, 'base64').toString()
@@ -40,7 +42,7 @@ const config = {
   },
   bcrypt: {
     saltRounds: parseInt(process.env.BCRYPT_SALT_ROUNDS, 10),
-  }
+  },
 }
 
 module.exports = config

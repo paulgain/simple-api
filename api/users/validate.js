@@ -1,12 +1,6 @@
 const Joi = require('@hapi/joi')
 
-const {
-  ID,
-  NAME,
-  DOB,
-  EMAIL,
-  PASSWORD
-} = require('../const')
+const { ID, NAME, DOB, EMAIL, PASSWORD } = require('../const')
 
 const USER = {
   firstname: NAME,
@@ -31,17 +25,17 @@ const validateId = (req, res, next) => {
 }
 
 const validateExistingUser = (req, res, next) => {
-  const { error } = EXISTING_USER.validate({ 
+  const { error } = EXISTING_USER.validate({
     id: req.params.id,
-    ...req.body
+    ...req.body,
   })
 
-  error ? res.status(400).send(error.message)  : next()
+  error ? res.status(400).send(error.message) : next()
 }
 
 const validateNewUser = (req, res, next) => {
   const { error } = NEW_USER.validate(req.body)
-  error ? res.status(400).send(error.message)  : next()
+  error ? res.status(400).send(error.message) : next()
 }
 
 module.exports = {

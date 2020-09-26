@@ -7,7 +7,8 @@ const { signToken } = require('../middleware/sign-token')
 
 const router = express.Router()
 
-router.post('/',
+router.post(
+  '/',
   validateLogin,
   getUserFromEmailAddress,
   comparePassword,

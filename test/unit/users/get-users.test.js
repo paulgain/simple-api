@@ -15,27 +15,23 @@ describe('getUsers', () => {
         firstname: 'Harry',
         lastname: 'Potter',
         dateOfBirth: '1990-01-01',
-        emailAddress: 'harry.potter@hp.com'
+        emailAddress: 'harry.potter@hp.com',
       },
       {
         userId: 2,
         firstname: 'Ron',
         lastname: 'Weasley',
         dateOfBirth: '1990-02-02',
-        emailAddress: 'ron.weasley@hp.com'
-      }
+        emailAddress: 'ron.weasley@hp.com',
+      },
     ]
-    
+
     const middleware = configureMiddleware({})
 
     before(async () => {
       getUsersStub.returns(users)
 
-      await controller.getUsers(
-        middleware.req,
-        middleware.res,
-        middleware.next
-      )
+      await controller.getUsers(middleware.req, middleware.res, middleware.next)
     })
 
     it('should get all users', () => {
@@ -53,16 +49,14 @@ describe('getUsers', () => {
     before(async () => {
       getUsersStub.rejects(error)
 
-      await controller.getUsers(
-        middleware.req,
-        middleware.res,
-        middleware.next
-      )
+      await controller.getUsers(middleware.req, middleware.res, middleware.next)
     })
 
     it('should should set status as 500 and display a message', () => {
       expect(middleware.res.status).to.have.been.calledWith(500)
-      expect(middleware.res.send).to.have.been.calledWith({ message: 'Some error' })
+      expect(middleware.res.send).to.have.been.calledWith({
+        message: 'Some error',
+      })
       expect(middleware.next).to.have.been.calledWith(error)
     })
   })
@@ -76,16 +70,12 @@ describe('getUsers', () => {
     before(async () => {
       getUsersStub.rejects(error)
 
-      await controller.getUsers(
-        middleware.req,
-        middleware.res,
-        middleware.next
-      )
+      await controller.getUsers(middleware.req, middleware.res, middleware.next)
     })
 
     it('should should display a different message', () => {
       expect(middleware.res.send).to.have.been.calledWith({
-        message: 'An error occurred while retrieving Users'
+        message: 'An error occurred while retrieving Users',
       })
     })
   })

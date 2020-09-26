@@ -6,9 +6,9 @@ const db = require('../db')
 const createUser = (user) => {
   return new Promise((resolve, reject) => {
     db.query('call createUser(?,?,?,?, ?)', user, (error, results) => {
-      error ? reject(error) : resolve(results[0][0])  
+      error ? reject(error) : resolve(results[0][0])
     })
-  });
+  })
 }
 
 const getUser = (userId) => {
@@ -19,18 +19,18 @@ const getUser = (userId) => {
       }
 
       if (!results[0].length) {
-        return reject(new NotFoundError()) 
+        return reject(new NotFoundError())
       }
 
       resolve(results[0])
     })
-  });
+  })
 }
 
 const getUsers = () => {
   return new Promise((resolve, reject) => {
     db.query('call getUsers()', (error, results) => {
-      error ? reject(error) : resolve(results[0])  
+      error ? reject(error) : resolve(results[0])
     })
   })
 }
@@ -45,7 +45,7 @@ const updateUser = (user) => {
       if (!results[0].length) {
         return reject(new NotFoundError())
       }
-      
+
       resolve(results[0])
     })
   })
@@ -53,15 +53,15 @@ const updateUser = (user) => {
 
 const deleteUser = (userId) => {
   return new Promise((resolve, reject) => {
-    db.query('call deleteUser(?)', userId, (error, results) => { 
+    db.query('call deleteUser(?)', userId, (error, results) => {
       if (error) {
         return reject(error)
       }
 
       if (results.affectedRows === 0) {
-        return reject(new NotFoundError()) 
+        return reject(new NotFoundError())
       }
-        
+
       resolve()
     })
   })
@@ -69,19 +69,23 @@ const deleteUser = (userId) => {
 
 const getUserFromEmailAddress = (emailAddress) => {
   return new Promise((resolve, reject) => {
-    db.query('call getUserFromEmailAddress(?)', emailAddress, (error, results) => {
-      if (error) {
-        return reject(error)
+    db.query(
+      'call getUserFromEmailAddress(?)',
+      emailAddress,
+      (error, results) => {
+        if (error) {
+          return reject(error)
+        }
+
+        const user = results[0][0]
+
+        if (isEmpty(user)) {
+          return reject(new NotFoundError())
+        }
+
+        resolve({ ...user })
       }
-
-      const user = results[0][0] 
-
-      if (isEmpty(user)) {
-        return reject(new NotFoundError()) 
-      }
-
-      resolve({ ...user })
-    })
+    )
   })
 }
 

@@ -20,7 +20,8 @@ const {
 } = require('./validate')
 
 // Create a new User
-router.post('/users', 
+router.post(
+  '/users',
   validateNewUser,
   newUserEmailAddressCheck,
   hashPassword,

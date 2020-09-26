@@ -4,13 +4,13 @@ const config = require('./')
 // ----------
 // Log levels
 // ----------
-// error: 0, 
-// warn: 1, 
-// info: 2, 
+// error: 0,
+// warn: 1,
+// info: 2,
 // http: 3,
-// verbose: 4, 
-// debug: 5, 
-// silly: 6 
+// verbose: 4,
+// debug: 5,
+// silly: 6
 
 const logger = createLogger({
   level: config.logLevel,
@@ -19,12 +19,9 @@ const logger = createLogger({
     new transports.Console({
       handleExceptions: true,
       humanReadableUnhandledException: true,
-      format: format.combine(
-        format.colorize({ all: true }),
-        format.simple(),
-      ),
-    })
+      format: format.combine(format.colorize({ all: true }), format.simple()),
+    }),
   ],
-});
+})
 
 module.exports = logger
