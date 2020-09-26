@@ -10,7 +10,8 @@
     "start": "node api",
     "develop": "NODE_ENV=development nodemon api",
     "test:unit": "NODE_ENV=test mocha",
-    "circle-unit": "MOCHA_FILE=junit/test-results.xml yarn test:unit"
+    "test:circle": "MOCHA_FILE=junit/test-results.xml yarn test:unit",
+    "lint": "eslint ./api ./test"
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
@@ -27,10 +28,14 @@
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "eslint": "^7.9.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "mocha": "^8.1.3",
     "mocha-circleci-reporter": "^0.0.3",
     "nock": "^13.0.4",
     "nodemon": "^2.0.4",
+    "prettier": "^2.1.2",
     "proxyquire": "^2.1.3",
     "sinon": "^9.0.3",
     "sinon-chai": "^3.5.0"

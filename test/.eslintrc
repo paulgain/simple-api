@@ -1,0 +1,18 @@
+{
+  "env": {
+    "mocha": true
+  },
+  "globals": {
+    "expect": true,
+    "proxyquire": true,
+    "sinon": true
+  },
+  "rules": {
+    "no-unused-expressions": 0
+  },
+  "overrides": [
+    {
+      "files": ["**/*.js"]
+    }
+  ]
+}
