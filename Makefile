@@ -11,6 +11,9 @@ start-api:
 stop-api:
 	docker-compose stop
 
+clean: 
+	docker system prune -f
+
 # -------------------------------------------
 # REST API endpoint helpers
 # -------------------------------------------
@@ -73,10 +76,15 @@ delete-user:
 # Pipeline
 # -------------------------------------------
 
-unit-tests:
-	@echo "Run the unit tests"
+lint:
+	@echo "Running linter"
 	docker build -t paulgain/simple-api:latest .
-	docker run -it paulgain/simple-api bash -c 'npm run test:unit'
+	docker run -it paulgain/simple-api bash -c 'yarn lint'
+
+unit-tests:
+	@echo "Running unit tests"
+	docker build -t paulgain/simple-api:latest .
+	docker run -it paulgain/simple-api bash -c 'yarn test:unit'
 
 # -------------------------------------------
 # Dockerhub
