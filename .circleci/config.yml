@@ -2,46 +2,34 @@ version: 2.1
 
 jobs:
   lint:
-    docker: 
+    docker:
       - image: circleci/node:12.18.0
     steps:
       - setup_remote_docker
       - checkout
-      - run_make:
-          label: Run linter
-          target: lint
+      - run:
+          name: Run linter
+          command: make lint
       - store_test_results:
           path: reports
       - store_artifacts:
           path: reports
 
   unit_tests:
-    docker: 
+    docker:
       - image: circleci/node:12.18.0
     steps:
       - setup_remote_docker
       - checkout
-      - run_make:
-          label: Run unit tests
-          target: unit-tests
-      - store_test_results:
-          path: junit
-      - store_artifacts:
-          path: junit
-
-commands:
-  run_make:
-    description: Run a makefile target
-    parameters:
-      label:
-        type: string
-        default: Execute make << parameters.target >>
-      target:
-        type: string
-    steps:
+      - run: 
+         command: mkdir -p test-results/mocha
       - run:
-          name: << parameters.label >>
-          command: make << parameters.target >>
+         name: 'Run unit tests'
+         command: make unit-tests
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
 
 workflows:
   version: 2

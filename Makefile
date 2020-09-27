@@ -84,7 +84,7 @@ lint:
 unit-tests:
 	@echo "Running unit tests"
 	docker build -t paulgain/simple-api:latest .
-	docker run -it paulgain/simple-api bash -c 'yarn test:unit'
+	docker run -it paulgain/simple-api bash -c 'yarn test:unit:ci'
 
 # -------------------------------------------
 # Dockerhub

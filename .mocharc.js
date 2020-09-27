@@ -1,9 +1,12 @@
 const proxyquire = require('proxyquire')
-const chai = require('chai')
 const sinon = require('sinon')
 const nock = require('nock')
+const chai = require('chai')
+const sinonChai = require('sinon-chai')
 
-chai.use(require('sinon-chai'))
+const config = require('./api/config/index')
+
+chai.use(sinonChai)
 
 global.expect = chai.expect
 global.sinon = sinon
@@ -13,6 +16,4 @@ global.rootPath = `${process.cwd()}`
 
 module.exports = {
   ui: 'bdd',
-  spec: 'test/unit/**/*.test.js',
-  reporter: 'mocha-circleci-reporter',
 }

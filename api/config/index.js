@@ -3,7 +3,16 @@ const isBase64 = require('is-base64')
 
 const root = path.normalize(`${__dirname}/../..`)
 
+const isDev = process.env.NODE_ENV === 'development'
+const isTest = process.env.NODE_ENV === 'test'
+const isProd = process.env.NODE_ENV === 'production'
+const isCI = process.env.CI === 'true' // CircleCI env var
+
 const decodeBase64Key = (key, envVar) => {
+  if (isTest) {
+    return
+  }
+
   if (!key) {
     throw new Error(`Missing env var ${envVar}`)
   }
@@ -17,12 +26,11 @@ const decodeBase64Key = (key, envVar) => {
   return Buffer.from(key, 'base64').toString()
 }
 
-const isDev = process.env.NODE_ENV === 'development'
-const isProd = process.env.NODE_ENV === 'production'
-
 const config = {
   root,
+  isCI,
   isDev,
+  isTest,
   isProd,
   port: process.env.PORT,
   logLevel: process.env.LOG_LEVEL,
