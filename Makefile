@@ -77,14 +77,14 @@ delete-user:
 # -------------------------------------------
 
 lint:
-	@echo "Running linter"
-	docker build -t paulgain/simple-api:latest .
-	docker run -it paulgain/simple-api bash -c 'yarn lint'
+	@echo "Running lint"
+	docker-compose build api
+	docker-compose run --no-deps --rm api bash -c 'yarn lint'
 
 unit-tests:
 	@echo "Running unit tests"
-	docker build -t paulgain/simple-api:latest .
-	docker run -it paulgain/simple-api bash -c 'yarn test:unit:ci'
+	docker-compose build api
+	docker-compose run --no-deps --rm api bash -c 'yarn test:unit:ci'
 
 # -------------------------------------------
 # Dockerhub

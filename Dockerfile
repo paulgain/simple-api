@@ -6,4 +6,3 @@ COPY yarn.lock .
 RUN yarn
 
 COPY . .
-COPY wait-for-it.sh .
