@@ -24,11 +24,13 @@ jobs:
       - setup_remote_docker
       - checkout
       - run: 
-         command: pwd   
+         command: pwd 
       - run: 
-         command: cp sample.env .env      
+         command: cp sample.env .env
       - run: 
          command: mkdir -p test-results/mocha
+      - run: 
+         command: ls -la    
       - run:
          name: 'Run unit tests'
          command: make unit-tests
