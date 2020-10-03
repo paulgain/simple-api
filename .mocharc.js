@@ -4,8 +4,6 @@ const nock = require('nock')
 const chai = require('chai')
 const sinonChai = require('sinon-chai')
 
-const config = require('./api/config/index')
-
 chai.use(sinonChai)
 
 global.expect = chai.expect

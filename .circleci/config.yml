@@ -7,13 +7,15 @@ jobs:
     steps:
       - setup_remote_docker
       - checkout
+      - run: 
+         command: cp sample.env .env
       - run:
           name: Run linter
           command: make lint
       - store_test_results:
-          path: reports
+          path: test-results
       - store_artifacts:
-          path: reports
+          path: test-results
 
   unit_tests:
     docker:
@@ -21,6 +23,10 @@ jobs:
     steps:
       - setup_remote_docker
       - checkout
+      - run: 
+         command: pwd   
+      - run: 
+         command: cp sample.env .env      
       - run: 
          command: mkdir -p test-results/mocha
       - run:
