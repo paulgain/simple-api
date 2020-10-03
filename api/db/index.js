@@ -19,7 +19,7 @@ connection.connect((error) => {
     return
   }
 
-  logger.info('MySQL connected on port %s', config.mysql.port)
+  logger.info(`MySQL connected on port ${config.mysql.port}`)
 })
 
 module.exports = connection
