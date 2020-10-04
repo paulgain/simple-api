@@ -4,7 +4,6 @@
 !package.json
 !yarn.lock
 !test/**
-!.env
 !.mocharc.js
 !.eslintrc
 !.prettierrc

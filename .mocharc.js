@@ -13,5 +13,5 @@ global.nock = nock
 global.rootPath = `${process.cwd()}`
 
 module.exports = {
-  ui: 'bdd',
+  ui: 'bdd'
 }

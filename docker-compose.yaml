@@ -5,12 +5,10 @@ services:
   api:
     build:
       context: .
-    volumes:
-      - ./api:/usr/src/app/api
+    image: api
     env_file: .env
     ports:
       - "3000:3000"
-    image: api
     depends_on:
       - db
     command: yarn develop

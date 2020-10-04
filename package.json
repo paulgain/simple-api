@@ -1,7 +1,7 @@
 {
   "name": "simple-api",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "api/index.js",
   "license": "MIT",
   "engines": {
     "node": "12.18.0"
@@ -10,8 +10,8 @@
     "start": "node api",
     "develop": "NODE_ENV=development nodemon api",
     "test:unit": "NODE_ENV=test npx mocha --reporter spec test/unit/**/*.test.js",
-    "test:unit:ci": "NODE_ENV=test npx mocha --reporter mocha-junit-reporter --reporter-options mochaFile=./test-results/mocha/results.xml test/unit/**/*.test.js",
-    "lint": "npx eslint --ext .js ."
+    "test:unit:ci": "NODE_ENV=test npx mocha --reporter mocha-junit-reporter --reporter-options mochaFile=test-results/mocha/results.xml test/unit/**/*.test.js",
+    "lint": "npx eslint --ext .js api test"
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",

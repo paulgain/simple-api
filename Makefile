@@ -84,7 +84,7 @@ lint:
 unit-tests:
 	@echo "Running unit tests"
 	docker-compose build api
-	docker-compose run --no-deps --rm api bash -c 'yarn test:unit'
+	docker-compose run --no-deps --rm api bash -c 'yarn test:unit:ci'
 
 # -------------------------------------------
 # Dockerhub
