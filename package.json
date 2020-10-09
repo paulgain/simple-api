@@ -9,8 +9,8 @@
   "scripts": {
     "start": "node api",
     "develop": "NODE_ENV=development nodemon api",
-    "test:unit": "NODE_ENV=test npx mocha --reporter spec test/unit/**/*.test.js",
-    "test:unit:ci": "NODE_ENV=test npx mocha --reporter mocha-junit-reporter --reporter-options mochaFile=test-results/mocha/results.xml test/unit/**/*.test.js",
+    "test:unit": "NODE_ENV=test npx mocha test/unit/**/*.test.js --reporter spec",
+    "test:unit:ci": "NODE_ENV=test npx mocha test/unit/**/*.test.js --reporter mocha-junit-reporter --reporter-options mochaFile=./test-results/mocha/results.xml && pwd && cat test-results/mocha/results.xml && ls -la",
     "lint": "npx eslint --ext .js api test"
   },
   "dependencies": {
