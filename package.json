@@ -11,7 +11,7 @@
     "develop": "NODE_ENV=development nodemon api",
     "test:unit": "NODE_ENV=test npx mocha test/unit/**/*.test.js --reporter spec",
     "test:unit:ci": "NODE_ENV=test npx mocha test/unit/**/*.test.js --reporter mocha-junit-reporter --reporter-options mochaFile=test-results/mocha/results.xml",
-    "lint": "npx eslint --ext .js api test"
+    "lint": "npx eslint --ext .js api test --format junit --output-file test-results/lint/results.xml"
   },
   "dependencies": {
     "@hapi/joi": "^17.1.1",
