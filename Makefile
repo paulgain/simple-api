@@ -86,6 +86,11 @@ unit-tests:
 	docker-compose build api
 	docker-compose run --no-deps --rm api bash -c 'yarn test:unit:ci'
 
+coverage:
+	@echo "Running coverage"
+	docker-compose build api
+	docker-compose run --no-deps --rm api bash -c 'yarn test:coverage'
+
 # -------------------------------------------
 # Dockerhub
 # -------------------------------------------
