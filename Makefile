@@ -1,5 +1,3 @@
-#!/bin/bash
-
 # -------------------------------------------
 # Utilities
 # -------------------------------------------
@@ -84,7 +82,11 @@ lint:
 unit-tests:
 	@echo "Running unit tests"
 	docker-compose build api
+ifdef CI
 	docker-compose run --no-deps --rm api bash -c 'yarn test:unit:ci'
+else
+	docker-compose run --no-deps --rm api bash -c 'yarn test:unit'
+endif
 
 coverage:
 	@echo "Running coverage"
