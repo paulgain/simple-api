@@ -1,15 +1,10 @@
 version: 2
 
-docker-defaults: &docker-defaults
-  docker:
-    - image: circleci/node:12.18.0
-
 jobs:
   lint:
-    <<: *docker-defaults
+    machine: true
     steps:
       - checkout
-      - setup_remote_docker
       - run:
           name: Copy over .env
           command: cp sample.env .env
@@ -18,10 +13,9 @@ jobs:
           command: make lint
 
   unit_tests:
-    <<: *docker-defaults
+    machine: true
     steps:
       - checkout
-      - setup_remote_docker
       - run:
           name: Copy over .env
           command: cp sample.env .env
