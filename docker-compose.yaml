@@ -12,6 +12,7 @@ services:
     depends_on:
       - db
     volumes:
+      - ./api:/usr/src/app/api
       - ./test-results:/usr/src/app/test-results
     command: yarn develop
 
