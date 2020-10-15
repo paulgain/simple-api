@@ -7,3 +7,4 @@
 !.mocharc.js
 !.eslintrc
 !.prettierrc
+!wait-for-it.sh

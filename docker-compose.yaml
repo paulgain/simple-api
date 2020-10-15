@@ -14,19 +14,18 @@ services:
     volumes:
       - ./api:/usr/src/app/api
       - ./test-results:/usr/src/app/test-results
-    command: yarn develop
+    command: bash -c './wait-for-it.sh db:${MYSQL_PORT} --timeout=60 -- yarn develop'
 
   db:
     image: mysql:5.7
     restart: always
     environment:
-      MYSQL_PORT: ${MYSQL_PORT}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD} 
     ports:
-      - "3307:3306"
+      - ${MYSQL_PORT}:${MYSQL_PORT}
     volumes:
       - mysql-data:/var/lib/mysql
       - mysql-logs:/var/log/mysql
