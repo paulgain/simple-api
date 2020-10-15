@@ -13,7 +13,7 @@ const config = require('./')
 // silly: 6
 
 const logger = createLogger({
-  level: config.logLevel,
+  level: config.server.logLevel,
   exitOnError: true,
   transports: [
     new transports.Console({

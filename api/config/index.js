@@ -32,8 +32,10 @@ const config = {
   isDev,
   isTest,
   isProd,
-  port: process.env.PORT,
-  logLevel: process.env.LOG_LEVEL,
+  server: {
+    port: process.env.SERVER_PORT,
+    logLevel: process.env.LOG_LEVEL,
+  },
   mysql: {
     port: process.env.MYSQL_PORT,
     rootPassword: process.env.MYSQL_ROOT_PASSWORD,

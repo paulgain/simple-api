@@ -23,6 +23,6 @@ app.use('/api', usersRoute)
 app.use(errors.notFound)
 app.use(errors.catchAll)
 
-app.listen(config.port, () => {
-  logger.info(`Server listening on port ${config.port}`)
+app.listen(config.server.port, () => {
+  logger.info(`Server listening on port ${config.server.port}`)
 })
